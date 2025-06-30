@@ -4,9 +4,15 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
+            <a class="nav-link <?php echo (uri_string() == 'dashboardtoko') ? "" : "collapsed" ?>" href="dashboardtoko">
+                <i class="bi bi-bar-chart"></i>
+                <span>Dashboard Toko</span>
+            </a>
+        </li><!-- End DashboardToko Nav -->
+        <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == '/') ? "" : "collapsed" ?>" href="/">
-                <span>Home</span>
                 <i class="bi bi-grid"></i>
+                <span>Beranda</span>
             </a>
         </li><!-- End Dashboard Nav -->
         <li class="nav-item">
@@ -24,12 +30,6 @@
                     <span>Produk</span>
                 </a>
             </li><!-- End Produk Nav -->
-            <li class="nav-item">
-                <a class="nav-link <?php echo (uri_string() == 'dashboardtoko') ? "" : "collapsed" ?>" href="dashboardtoko">
-                    <i class="bi bi-bar-chart"></i>
-                    <span>Dashboard Toko</span>
-                </a>
-            </li><!-- End DashboardToko Nav -->
         <?php
         }
         ?>

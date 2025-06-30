@@ -1,59 +1,116 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Dashboard - Toko</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 40px;
+            color: #000;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 0;
+        }
+
+        p.date {
+            text-align: center;
+            margin-top: 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th,
+        td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f1f1f1;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fbfbfb;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="p-3 pb-md-4 mx-auto text-center">
-        <h1 class="display-4 fw-normal text-body-emphasis">Cetak Data Transaksi</h1>
-        <p class="fs-5 text-body-secondary"><?= date("l, d-m-Y") ?></p>
-    </div>
+
+    <h1>Dashboard - TOKO</h1>
+    <p class="date"><?= date("l, d-m-Y") ?> ::</p>
     <hr>
-    <div class="table-responsive card m-5 p-5">
-        <table class="table text-center">
+
+    <div class="table-container">
+        <table>
             <thead>
                 <tr>
-                    <th style="width: 5%;">No</th>
-                    <th style="width: 10%;">Username</th>
-                    <th style="width: 30%;">Alamat</th>
-                    <th style="width: 10%;">Total Harga</th>
-                    <th style="width: 10%;">Ongkir</th>
-                    <th style="width: 10%;">Status</th>
-                    <th style="width: 25%;">Tanggal Transaksi</th>
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Alamat</th>
+                    <th>Total Harga</th>
+                    <th>Ongkir</th>
+                    <th>Status</th>
+                    <th>Tanggal Transaksi</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($transactions)) {
-                    $i = 1;
-                    foreach ($transactions as $item1) {
-                ?>
+                <?php if (!empty($transactions)): ?>
+                    <?php $i = 1;
+                    foreach ($transactions as $row): ?>
                         <tr>
                             <td><?= $i++ ?></td>
-                            <td><?= $item1['username']; ?></td>
-                            <td><?= $item1['alamat']; ?></td>
-                            <td><?= $item1['total_harga']; ?></td>
-                            <td><?= $item1['ongkir']; ?></td>
-                            <td><?= $item1['status']; ?></td>
-                            <td><?= $item1['created_at']; ?></td>
+                            <td><?= esc($row['username']) ?></td>
+                            <td class="text-left"><?= esc($row['alamat']) ?></td>
+                            <td>Rp <?= number_format($row['total_harga'], 0, ',', '.') ?></td>
+                            <td>Rp <?= number_format($row['ongkir'], 0, ',', '.') ?></td>
+                            <td><?= $row['status'] == 0 ? 'Belum Dikirim' : 'Terkirim' ?></td>
+                            <td><?= date('d-m-Y H:i', strtotime($row['created_at'])) ?></td>
                         </tr>
-                <?php }
-                } else { ?>
+                    <?php endforeach ?>
+                <?php else: ?>
                     <tr>
                         <td colspan="7">Tidak ada data transaksi.</td>
                     </tr>
-                <?php } ?>
+                <?php endif ?>
             </tbody>
         </table>
     </div>
 
-    <script>
-        window.print();
-    </script>
+    <div class="footer">
+        Download on <?= date('Y-m-d H:i:s') ?>
+    </div>
+
 </body>
 
 </html>

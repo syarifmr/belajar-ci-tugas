@@ -1,3 +1,5 @@
+<?= $this->extend('layout') ?>
+<?= $this->section('content') ?>
 <!doctype html>
 <html lang="en">
 
@@ -50,7 +52,9 @@
             </tbody>
         </table>
         <center>
-            <a href="<?= base_url('dashboardtoko/cetak') ?>" target="_blank">Cetak</a>
+            <a href="<?= base_url('DashboardToko/export-pdf') ?>" class="btn btn-danger mb-3" target="_blank">
+                Export PDF
+            </a>
         </center>
     </div>
 
@@ -68,3 +72,4 @@
 </body>
 
 </html>
+<?= $this->endSection() ?>

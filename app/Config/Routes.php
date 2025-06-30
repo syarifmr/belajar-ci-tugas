@@ -42,4 +42,4 @@ $routes->get('get-cost', 'TransaksiController::getCost', ['filter' => 'auth']);
 $routes->get('profile', 'Home::profile', ['filter' => 'auth']);
 $routes->resource('api', ['controller' => 'apiController']);
 $routes->get('dashboardtoko', 'Dashboard::index');
-$routes->get('dashboardtoko/cetak', 'Dashboard::cetak');
+$routes->get('DashboardToko/export-pdf', 'Dashboard::exportPdf');

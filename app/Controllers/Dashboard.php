@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProductModel;
 use App\Models\TransactionModel;
+use Dompdf\Dompdf;
 
 class Dashboard extends BaseController
 {
@@ -54,16 +55,22 @@ class Dashboard extends BaseController
         ]);
     }
 
-    public function cetak()
+    public function exportPdf()
     {
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
-            return redirect()->to('/');
+            return redirect()->to('login');
         }
-        $transactions = $this->transaction->orderBy('created_at', 'DESC')->findAll();
-        $apiData = $this->getApiData();
-        return view('DashboardToko/cetak', [
-            'transactions' => $transactions,
-            'apiData' => $apiData
-        ]);
+
+        $transaksiModel = new TransactionModel();
+        $data['transactions'] = $transaksiModel->findAll(); // bukan $data['transaksis']
+
+
+        $html = view('DashboardToko/cetak', $data); // sesuaikan view path
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream('laporan_dashboard.pdf', ['Attachment' => false]); // preview
     }
 }
