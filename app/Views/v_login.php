@@ -69,6 +69,8 @@
                                  <?= form_close() ?>
 
                              </div>
+                             <p class="mt-3">Belum punya akun? <a href="<?= base_url('register') ?>">Daftar di sini</a></p>
+
                          </div>
 
                          <div class="credits">

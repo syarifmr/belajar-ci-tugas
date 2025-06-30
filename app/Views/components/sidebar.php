@@ -1,32 +1,45 @@
-    <!-- ======= Sidebar ======= -->
-    <aside id="sidebar" class="sidebar">
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
 
-        <ul class="sidebar-nav" id="sidebar-nav">
+    <ul class="sidebar-nav" id="sidebar-nav">
 
+        <li class="nav-item">
+            <a class="nav-link <?php echo (uri_string() == '/') ? "" : "collapsed" ?>" href="/">
+                <span>Home</span>
+                <i class="bi bi-grid"></i>
+            </a>
+        </li><!-- End Dashboard Nav -->
+        <li class="nav-item">
+            <a class="nav-link <?php echo (uri_string() == 'keranjang') ? "" : "collapsed" ?>" href="keranjang">
+                <i class="bi bi-cart-check"></i>
+                <span>Keranjang</span>
+            </a>
+        </li><!-- End Keranjang Nav -->
+        <?php
+        if (session()->get('role') == 'admin') {
+        ?>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="<?php echo (uri_string() == '') ? "" : "collapsed" ?>" href="/">
-                    <i class="bi bi-grid"></i>
-                    <span>Home</span>
+                <a class="nav-link <?php echo (uri_string() == 'produk') ? "" : "collapsed" ?>" href="produk">
+                    <i class="bi bi-receipt"></i>
+                    <span>Produk</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li><!-- End Produk Nav -->
             <li class="nav-item">
-                <a class="nav-link <?php echo (uri_string() == 'keranjang') ? "" : "collapsed" ?>" href="keranjang">
-                    <i class="bi bi-cart-check"></i>
-                    <span>Keranjang</span>
+                <a class="nav-link <?php echo (uri_string() == 'dashboardtoko') ? "" : "collapsed" ?>" href="dashboardtoko">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Dashboard Toko</span>
                 </a>
-            </li><!-- End Keranjang Nav -->
-            <?php
-            if (session()->get('role') == 'admin') {
-            ?>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (uri_string() == 'produk') ? "" : "collapsed" ?>" href="produk">
-                        <i class="bi bi-receipt"></i>
-                        <span>Produk</span>
-                    </a>
-                </li><!-- End Produk Nav -->
-            <?php
-            }
-            ?>
-        </ul>
+            </li><!-- End DashboardToko Nav -->
+        <?php
+        }
+        ?>
 
-    </aside><!-- End Sidebar-->
+        <li class="nav-item">
+            <a class="nav-link <?php echo (uri_string() == 'profile') ? "" : "collapsed" ?>" href="profile">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+            </a>
+        </li><!-- End Profile Nav -->
+    </ul>
+
+</aside><!-- End Sidebar-->

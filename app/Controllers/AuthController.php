@@ -56,6 +56,41 @@ class AuthController extends BaseController
 
         return view('v_login');
     }
+
+    public function register()
+    {
+        $userModel = new \App\Models\UserModel();
+
+        if ($this->request->getMethod() === 'post') {
+            $rules = [
+                'username' => 'required|min_length[6]|is_unique[user.username]',
+                'email'    => 'required|valid_email|is_unique[user.email]',
+                'password' => 'required|min_length[7]',
+            ];
+
+            if (! $this->validate($rules)) {
+                session()->setFlashdata('failed', $this->validator->listErrors());
+                return redirect()->back()->withInput();
+            }
+
+            $data = [
+                'username'   => $this->request->getPost('username'),
+                'email'      => $this->request->getPost('email'),
+                'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                'role'       => 'guest',
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+
+            if (! $userModel->insert($data)) {
+                session()->setFlashdata('failed', implode(', ', $userModel->errors()));
+                return redirect()->back()->withInput();
+            }
+
+            return redirect()->to('login')->with('success', 'Akun berhasil dibuat.');
+        }
+
+        return view('v_register');
+    }
     public function logout()
     {
         session()->destroy();
