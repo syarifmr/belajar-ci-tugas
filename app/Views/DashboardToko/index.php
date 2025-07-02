@@ -201,7 +201,7 @@
             </tbody>
         </table>
         <div class="text-center">
-            <a href="<?= base_url('DashboardToko/export-pdf') ?>" class="btn btn-export mb-3 mt-2" target="_blank">
+            <a href="<?= base_url('DashboardToko/cetak') ?>" class="btn btn-export mb-3 mt-2" target="_blank" id="btn-cetak">
                 <i class="fa-solid fa-file-pdf"></i> Export PDF
             </a>
         </div>

@@ -129,3 +129,10 @@
 </body>
 
 </html>
+
+<script>
+    window.print();
+    window.setTimeout(() => {
+        window.close();
+    }, 1000);
+</script>

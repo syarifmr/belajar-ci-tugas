@@ -64,22 +64,14 @@ class Dashboard extends BaseController
         ]);
     }
 
-    public function exportPdf()
+    public function cetak()
     {
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
             return redirect()->to('login');
         }
 
         $transaksiModel = new TransactionModel();
-        $data['transactions'] = $transaksiModel->findAll(); // bukan $data['transaksis']
-
-
-        $html = view('DashboardToko/cetak', $data); // sesuaikan view path
-
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'landscape');
-        $dompdf->render();
-        $dompdf->stream('laporan_dashboard.pdf', ['Attachment' => false]); // preview
+        $data['transactions'] = $transaksiModel->findAll();
+        return view('DashboardToko/cetak', $data);
     }
 }

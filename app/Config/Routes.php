@@ -54,3 +54,4 @@ $routes->get('profile', 'Home::profile', ['filter' => 'auth']);
 $routes->resource('api', ['controller' => 'apiController']);
 $routes->get('dashboardtoko', 'Dashboard::index');
 $routes->get('DashboardToko/export-pdf', 'Dashboard::exportPdf');
+$routes->get('DashboardToko/cetak', 'Dashboard::cetak');
