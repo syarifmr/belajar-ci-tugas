@@ -21,7 +21,7 @@
                          <div class="d-flex justify-content-center py-4">
                              <a href="index.html" class="logo d-flex align-items-center w-auto">
                                  <img src="<?php echo base_url() ?>NiceAdmin/assets/img/logo.png" alt="">
-                                 <span class="d-none d-lg-block">Toko</span>
+                                 <span class="d-none d-lg-block">Batik BALADINA</span>
                              </a>
                          </div><!-- End Logo -->
 
@@ -69,7 +69,7 @@
                                  <?= form_close() ?>
 
                              </div>
-                             <p class="mt-3">Belum punya akun? <a href="<?= base_url('register') ?>">Daftar di sini</a></p>
+                             <p class="mt-3 text-center">Belum punya akun? <a href="<?= base_url('register') ?>">Daftar di sini</a></p>
 
                          </div>
 

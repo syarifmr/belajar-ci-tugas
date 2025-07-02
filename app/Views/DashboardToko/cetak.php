@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Toko</title>
+    <title>Dashboard - Batik BALADINA</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -67,7 +67,7 @@
 
 <body>
 
-    <h1>Dashboard - TOKO</h1>
+    <h1>Dashboard - Batik BALADINA</h1>
     <p class="date"><?= date("l, d-m-Y") ?> ::</p>
     <hr>
 

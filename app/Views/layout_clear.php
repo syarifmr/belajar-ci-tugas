@@ -12,7 +12,7 @@ if (uri_string() != "") {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Toko Masyarakat Siripss -<?php echo $hlm ?></title>
+    <title>Batik BALADINA<?php echo $hlm ?></title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -47,25 +47,7 @@ if (uri_string() != "") {
 
 <body>
 
-    <main id="main" class="main">
-
-        <div class="pagetitle">
-            <h1>Data Tables</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Home</li>
-                        <?php
-                        if ($hlm != "Home") {
-                        ?>
-                            <li class="breadcrumb-item"><?php echo $hlm ?></li>
-                        <?php
-                        }
-                        ?>
-                    </ol>
-            </nav>
-        </div><!-- End Page Title -->
-
+    <main>
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
