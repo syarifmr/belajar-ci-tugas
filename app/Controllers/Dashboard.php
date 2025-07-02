@@ -4,17 +4,20 @@ namespace App\Controllers;
 
 use App\Models\ProductModel;
 use App\Models\TransactionModel;
+use App\Models\UserModel;
 use Dompdf\Dompdf;
 
 class Dashboard extends BaseController
 {
     protected $product;
     protected $transaction;
+    protected $user;
 
     public function __construct()
     {
         $this->product = new ProductModel();
         $this->transaction = new TransactionModel();
+        $this->user = new UserModel();
     }
 
     protected function getApiData()
@@ -48,10 +51,16 @@ class Dashboard extends BaseController
             return redirect()->to('/');
         }
         $transactions = $this->transaction->orderBy('created_at', 'DESC')->findAll();
+        $totalUser = $this->user->countAllResults();
+        $totalTransaksi = $this->transaction->countAllResults();
+        $totalPendapatan = $this->transaction->selectSum('total_harga')->first()['total_harga'] ?? 0;
         $apiData = $this->getApiData();
         return view('DashboardToko/index', [
             'transactions' => $transactions,
-            'apiData' => $apiData
+            'apiData' => $apiData,
+            'totalUser' => $totalUser,
+            'totalTransaksi' => $totalTransaksi,
+            'totalPendapatan' => $totalPendapatan
         ]);
     }
 
