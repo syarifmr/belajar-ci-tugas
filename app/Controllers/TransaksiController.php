@@ -177,4 +177,15 @@ class TransaksiController extends BaseController
             return redirect()->to(base_url());
         }
     }
+
+    public function updateStatus()
+    {
+        $id = $this->request->getPost('id');
+        $status = $this->request->getPost('status');
+
+        $model = new \App\Models\TransactionModel();
+        $model->update($id, ['status' => $status]);
+
+        return redirect()->back()->with('success', 'Status berhasil diperbarui.');
+    }
 }

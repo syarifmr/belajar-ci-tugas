@@ -1,40 +1,54 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
-History Transaksi Pembelian <strong><?= $username ?></strong>
+<h5>History Transaksi Pembelian <strong><?= $username ?></strong></h5>
 <hr>
 <div class="table-responsive">
-    <!-- Table with stripped rows -->
     <table class="table datatable">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">ID Pembelian</th>
-                <th scope="col">Waktu Pembelian</th>
-                <th scope="col">Total Bayar</th>
-                <th scope="col">Alamat</th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
+                <th>#</th>
+                <th>ID Pembelian</th>
+                <th>Waktu Pembelian</th>
+                <th>Total Bayar</th>
+                <th>Alamat</th>
+                <th>Status</th>
+                <th>Detail</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            if (!empty($buy)) :
-                foreach ($buy as $index => $item) :
-            ?>
+            <?php if (!empty($buy)) : ?>
+                <?php foreach ($buy as $index => $item) : ?>
                     <tr>
-                        <th scope="row"><?php echo $index + 1 ?></th>
-                        <td><?php echo $item['id'] ?></td>
-                        <td><?php echo $item['created_at'] ?></td>
-                        <td><?php echo number_to_currency($item['total_harga'], 'IDR') ?></td>
-                        <td><?php echo $item['alamat'] ?></td>
-                        <td><?php echo ($item['status'] == "1") ? "Sudah Selesai" : "Belum Selesai" ?></td>
+                        <th scope="row"><?= $index + 1 ?></th>
+                        <td><?= $item['id'] ?></td>
+                        <td><?= $item['created_at'] ?></td>
+                        <td><?= number_to_currency($item['total_harga'], 'IDR') ?></td>
+                        <td><?= $item['alamat'] ?></td>
+                        <td>
+                            <?php
+                            $statusList = [
+                                '0' => 'Belum Selesai',
+                                '1' => 'Dikemas',
+                                '2' => 'Dikirim',
+                                '3' => 'Selesai',
+                                'belum_selesai' => 'Belum Selesai',
+                                'dikemas' => 'Dikemas',
+                                'dikirim' => 'Dikirim',
+                                'selesai' => 'Selesai'
+                            ];
+                            $statusKey = $item['status'];
+                            echo isset($statusList[$statusKey]) ? $statusList[$statusKey] : $statusKey;
+                            ?>
+                        </td>
+
                         <td>
                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#detailModal-<?= $item['id'] ?>">
                                 Detail
                             </button>
                         </td>
                     </tr>
-                    <!-- Detail Modal Begin -->
+
+                    <!-- Detail Modal -->
                     <div class="modal fade" id="detailModal-<?= $item['id'] ?>" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -44,29 +58,25 @@ History Transaksi Pembelian <strong><?= $username ?></strong>
                                 </div>
                                 <div class="modal-body">
                                     <?php foreach ($product[$item['id']] as $index2 => $item2) : ?>
-                                        <?php echo $index2 + 1 . ")" ?>
-                                        <?php if ($item2['foto'] != '' and file_exists("img/" . $item2['foto'] . "")) : ?>
-                                            <img src="<?php echo base_url() . "img/" . $item2['foto'] ?>" width="100px">
+                                        <?= $index2 + 1 ?>)
+                                        <?php if ($item2['foto'] && file_exists("img/" . $item2['foto'])) : ?>
+                                            <img src="<?= base_url("img/" . $item2['foto']) ?>" width="100px"><br>
                                         <?php endif; ?>
-                                        <strong><?= $item2['nama'] ?></strong>
-                                        <?= number_to_currency($item2['harga'], 'IDR') ?>
-                                        <br>
-                                        <?= "(" . $item2['jumlah'] . " pcs)" ?><br>
-                                        <?= number_to_currency($item2['subtotal_harga'], 'IDR') ?>
+                                        <strong><?= $item2['nama'] ?></strong><br>
+                                        <?= number_to_currency($item2['harga'], 'IDR') ?> x <?= $item2['jumlah'] ?> pcs<br>
+                                        <strong><?= number_to_currency($item2['subtotal_harga'], 'IDR') ?></strong>
                                         <hr>
                                     <?php endforeach; ?>
-                                    Ongkir <?= number_to_currency($item['ongkir'], 'IDR') ?>
+                                    Ongkir: <?= number_to_currency($item['ongkir'], 'IDR') ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Detail Modal End -->
-            <?php
-                endforeach;
-            endif;
-            ?>
+                    <!-- End Modal -->
+
+                <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
-    <!-- End Table with stripped rows -->
 </div>
 <?= $this->endSection() ?>

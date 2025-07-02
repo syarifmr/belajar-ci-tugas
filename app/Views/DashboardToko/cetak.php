@@ -94,7 +94,22 @@
                             <td class="text-left"><?= esc($row['alamat']) ?></td>
                             <td>Rp <?= number_format($row['total_harga'], 0, ',', '.') ?></td>
                             <td>Rp <?= number_format($row['ongkir'], 0, ',', '.') ?></td>
-                            <td><?= $row['status'] == 0 ? 'Belum Dikirim' : 'Terkirim' ?></td>
+                            <td>
+                                <?php
+                                $statusList = [
+                                    '0' => 'Belum Selesai',
+                                    '1' => 'Dikemas',
+                                    '2' => 'Dikirim',
+                                    '3' => 'Selesai',
+                                    'belum_selesai' => 'Belum Selesai',
+                                    'dikemas' => 'Dikemas',
+                                    'dikirim' => 'Dikirim',
+                                    'selesai' => 'Selesai'
+                                ];
+                                $statusKey = $row['status'];
+                                echo isset($statusList[$statusKey]) ? $statusList[$statusKey] : $statusKey;
+                                ?>
+                            </td>
                             <td><?= date('d-m-Y H:i', strtotime($row['created_at'])) ?></td>
                         </tr>
                     <?php endforeach ?>

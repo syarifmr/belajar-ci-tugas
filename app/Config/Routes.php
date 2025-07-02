@@ -7,11 +7,20 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-$routes->post('login', 'AuthController::login');
-$routes->get('login', 'AuthController::login');
-$routes->get('logout', 'AuthController::logout');
-$routes->match(['get', 'post'], 'register', 'AuthController::register');
+// Tampilkan form register
+$routes->get('register', 'AuthController::register');
 
+// Proses form register (POST)
+$routes->post('register', 'AuthController::processRegister');
+
+// Tampilkan form login
+$routes->get('login', 'AuthController::login');
+
+// Proses form login (POST bisa langsung ke method login)
+$routes->post('login', 'AuthController::login');
+
+// Logout
+$routes->get('logout', 'AuthController::logout');
 
 
 $routes->group('produk', ['filter' => 'auth'], function ($routes) {
@@ -38,6 +47,8 @@ $routes->get('checkout', 'TransaksiController::checkout', ['filter' => 'auth']);
 $routes->post('buy', 'TransaksiController::buy', ['filter' => 'auth']);
 $routes->get('get-location', 'TransaksiController::getLocation', ['filter' => 'auth']);
 $routes->get('get-cost', 'TransaksiController::getCost', ['filter' => 'auth']);
+$routes->post('dashboardtoko/update-status', 'DashboardToko::updateStatus');
+$routes->post('transaksi/updateStatus', 'TransaksiController::updateStatus');
 
 $routes->get('profile', 'Home::profile', ['filter' => 'auth']);
 $routes->resource('api', ['controller' => 'apiController']);

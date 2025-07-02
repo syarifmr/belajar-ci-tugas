@@ -3,9 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
-
 use App\Models\UserModel;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class AuthController extends BaseController
 {
@@ -21,8 +20,8 @@ class AuthController extends BaseController
     {
         if ($this->request->getPost()) {
             $rules = [
-                'username' => 'required|min_length[6]',
-                'password' => 'required|min_length[7]|numeric',
+                'username' => 'required',
+                'password' => 'required'
             ];
 
             if ($this->validate($rules)) {
@@ -57,43 +56,39 @@ class AuthController extends BaseController
         return view('v_login');
     }
 
-    public function register()
-    {
-        $userModel = new \App\Models\UserModel();
-
-        if ($this->request->getMethod() === 'post') {
-            $rules = [
-                'username' => 'required|min_length[6]|is_unique[user.username]',
-                'email'    => 'required|valid_email|is_unique[user.email]',
-                'password' => 'required|min_length[7]',
-            ];
-
-            if (! $this->validate($rules)) {
-                session()->setFlashdata('failed', $this->validator->listErrors());
-                return redirect()->back()->withInput();
-            }
-
-            $data = [
-                'username'   => $this->request->getPost('username'),
-                'email'      => $this->request->getPost('email'),
-                'password'   => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'role'       => 'guest',
-                'created_at' => date('Y-m-d H:i:s'),
-            ];
-
-            if (! $userModel->insert($data)) {
-                session()->setFlashdata('failed', implode(', ', $userModel->errors()));
-                return redirect()->back()->withInput();
-            }
-
-            return redirect()->to('login')->with('success', 'Akun berhasil dibuat.');
-        }
-
-        return view('v_register');
-    }
     public function logout()
     {
         session()->destroy();
         return redirect()->to('login');
+    }
+
+    public function register()
+    {
+        return view('v_register'); // view yang sudah kamu buat
+    }
+
+    public function processRegister()
+    {
+        $rules = [
+            'username'      => 'required|min_length[4]|is_unique[user.username]',
+            'email'         => 'required|valid_email|is_unique[user.email]',
+            'password'      => 'required|min_length[6]',
+            'pass_confirm'  => 'required|matches[password]'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error', $this->validator->listErrors());
+        }
+
+        $data = [
+            'username' => $this->request->getPost('username'),
+            'email'    => $this->request->getPost('email'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'role'     => 'guest'
+        ];
+
+        $this->user->save($data);
+
+        return redirect()->to('login')->with('success', 'Akun berhasil dibuat. Silakan login.');
     }
 }
