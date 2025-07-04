@@ -42,7 +42,7 @@ class TransaksiController extends BaseController
             'options'   => array('foto' => $this->request->getPost('foto'))
         ));
         session()->setFlashdata('success', 'Produk berhasil ditambahkan ke keranjang. (<a href="' . base_url() . 'keranjang">Lihat</a>)');
-        return redirect()->to(base_url('/'));
+        return redirect()->to(base_url('produk'));
     }
 
     public function cart_clear()
@@ -174,7 +174,8 @@ class TransaksiController extends BaseController
 
             $this->cart->destroy();
 
-            return redirect()->to(base_url());
+            return redirect()->to(base_url('produk'))
+                ->with('success', 'Transaksi berhasil dilakukan. Terima kasih telah berbelanja!');
         }
     }
 

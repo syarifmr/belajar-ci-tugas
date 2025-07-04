@@ -101,7 +101,7 @@
 <body>
     <div class="container py-4">
         <div class="dashboard-header text-center mx-auto mb-4">
-            <h1 class="display-5"><i class="fa-solid fa-store"></i> Dashboard <span style="color:#fbbf24;">TOKO</span></h1>
+            <h1 class="display-5"><i class="fa-solid fa-store"></i> Batik <span style="color:#fbbf24;">BALADINA</span></h1>
             <p><?= date("l, d-m-Y") ?> <span id="jam"></span>:<span id="menit"></span>:<span id="detik"></span></p>
         </div>
 

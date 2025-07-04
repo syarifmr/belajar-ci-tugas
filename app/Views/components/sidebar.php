@@ -2,6 +2,13 @@
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link <?php echo (uri_string() == '/') ? "" : "collapsed" ?>" href="/">
+                <i class="bi bi-grid"></i>
+                <span>Beranda</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
         <?php
         if (session()->get('role') == 'admin') {
         ?>
@@ -15,11 +22,12 @@
         }
         ?>
         <li class="nav-item">
-            <a class="nav-link <?php echo (uri_string() == '/') ? "" : "collapsed" ?>" href="/">
+            <a class="nav-link <?php echo (uri_string() == 'produk') ? "" : "collapsed" ?>" href="produk">
                 <i class="bi bi-grid"></i>
-                <span>Beranda</span>
+                <span>Produk</span>
             </a>
         </li><!-- End Dashboard Nav -->
+
         <li class="nav-item">
             <a class="nav-link <?php echo (uri_string() == 'keranjang') ? "" : "collapsed" ?>" href="keranjang">
                 <i class="bi bi-cart-check"></i>
@@ -30,9 +38,9 @@
         if (session()->get('role') == 'admin') {
         ?>
             <li class="nav-item">
-                <a class="nav-link <?php echo (uri_string() == 'produk') ? "" : "collapsed" ?>" href="produk">
+                <a class="nav-link <?php echo (uri_string() == 'kelolaproduk') ? "" : "collapsed" ?>" href="kelolaproduk">
                     <i class="bi bi-receipt"></i>
-                    <span>Produk</span>
+                    <span>Kelola Produk</span>
                 </a>
             </li><!-- End Produk Nav -->
         <?php

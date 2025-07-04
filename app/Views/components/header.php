@@ -1,6 +1,22 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
+        <style>
+            header.header {
+                background: #6366f1 !important;
+                color: #fff !important;
+            }
 
+            .header .nav-link,
+            .header .dropdown-toggle,
+            .header .logo span,
+            .header .bi {
+                color: #fff !important;
+            }
+
+            .header .dropdown-menu {
+                color: #333 !important;
+            }
+        </style>
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
                 <img src="<?= base_url() ?>NiceAdmin/assets/img/logo.png" alt="">

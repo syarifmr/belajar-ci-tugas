@@ -25,7 +25,7 @@ if (session()->getFlashData('failed')) {
     Tambah Data
 </button>
 
-<a type="button" class="btn btn-success" href="<?= base_url() ?>produk/download">
+<a type="button" class="btn btn-success" href="<?= base_url() ?>kelolaproduk/download">
     Download
 </a>
 
@@ -57,7 +57,7 @@ if (session()->getFlashData('failed')) {
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal-<?= $produk['id'] ?>">
                         Ubah
                     </button>
-                    <a href="<?= base_url('produk/delete/' . $produk['id']) ?>" class="btn btn-danger" onclick="return confirm('Yakin hapus data ini ?')">
+                    <a href="<?= base_url('kelolaproduk/delete/' . $produk['id']) ?>" class="btn btn-danger" onclick="return confirm('Yakin hapus data ini ?')">
                         Hapus
                     </a>
                 </td>
@@ -70,7 +70,7 @@ if (session()->getFlashData('failed')) {
                             <h5 class="modal-title">Edit Data</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="<?= base_url('produk/edit/' . $produk['id']) ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?= base_url('kelolaproduk/edit/' . $produk['id']) ?>" method="post" enctype="multipart/form-data">
                             <?= csrf_field(); ?>
                             <div class="modal-body">
                                 <div class="form-group">
@@ -119,7 +119,7 @@ if (session()->getFlashData('failed')) {
                 <h5 class="modal-title">Tambah Data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="<?= base_url('produk') ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('kelolaproduk') ?>" method="post" enctype="multipart/form-data">
                 <?= csrf_field(); ?>
                 <div class="modal-body">
                     <div class="form-group">

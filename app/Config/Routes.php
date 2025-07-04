@@ -5,7 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'LandingController::index');
+$routes->get('produk', 'Home::index');
 
 // Tampilkan form register
 $routes->get('register', 'AuthController::register');
@@ -23,15 +24,15 @@ $routes->post('login', 'AuthController::login');
 $routes->get('logout', 'AuthController::logout');
 
 
-$routes->group('produk', ['filter' => 'auth'], function ($routes) {
+$routes->group('kelolaproduk', ['filter' => 'auth'], function ($routes) {
     $routes->get('', 'ProdukController::index');
     $routes->post('', 'ProdukController::create');
     $routes->post('edit/(:any)', 'ProdukController::edit/$1');
     $routes->get('delete/(:any)', 'ProdukController::delete/$1');
-    $routes->post('produk', 'ProdukController::create', ['filter' => 'auth']);
-    $routes->post('produk', 'ProdukController::create', ['filter' => 'auth']);
-    $routes->post('produk/edit/(:any)', 'ProdukController::edit/$1', ['filter' => 'auth']);
-    $routes->get('produk/delete/(:any)', 'ProdukController::delete/$1', ['filter' => 'auth']);
+    $routes->post('kelolaproduk', 'ProdukController::create', ['filter' => 'auth']);
+    $routes->post('kelolaproduk', 'ProdukController::create', ['filter' => 'auth']);
+    $routes->post('kelolaproduk/edit/(:any)', 'ProdukController::edit/$1', ['filter' => 'auth']);
+    $routes->get('kelolaproduk/delete/(:any)', 'ProdukController::delete/$1', ['filter' => 'auth']);
     $routes->get('download', 'ProdukController::download');
 });
 
@@ -53,5 +54,4 @@ $routes->post('transaksi/updateStatus', 'TransaksiController::updateStatus');
 $routes->get('profile', 'Home::profile', ['filter' => 'auth']);
 $routes->resource('api', ['controller' => 'apiController']);
 $routes->get('dashboardtoko', 'Dashboard::index');
-$routes->get('DashboardToko/export-pdf', 'Dashboard::exportPdf');
 $routes->get('DashboardToko/cetak', 'Dashboard::cetak');
